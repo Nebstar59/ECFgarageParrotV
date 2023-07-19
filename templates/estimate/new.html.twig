@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Estimate{% endblock %}
+
+{% block body %}
+    <h2 class="subtitle">Demande de devis</h1>
+
+    {{ include('estimate/_form.html.twig') }}
+
+    <a href="{{ path('app_home') }}" class="btn btn-warning">Retour à l'accueil</a>
+    
+{% endblock %}

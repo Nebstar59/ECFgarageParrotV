@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact index{% endblock %}
+
+{% block body %}
+
+{% if is_granted ('ROLE_ADMIN') %}
+    <h2 class="subtitle">Liste des contacts</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Email</th>
+                <th>Message</th>
+                <th>Véhicule</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for contact in contacts %}
+            <tr>
+                <td>{{ contact.id }}</td>
+                <td>{{ contact.firstname }}</td>
+                <td>{{ contact.lastname }}</td>
+                <td>{{ contact.email }}</td>
+                <td>{{ contact.message }}</td>
+                <td>{{ contact.car.brand }} {{ contact.car.model }}</td>
+                <td>
+                    <a href="{{ path('app_contact_show', {'id': contact.id}) }}">Voir le contact</a>
+                    <a href="{{ path('app_contact_edit', {'id': contact.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Aucune demande de contact</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <h2 class="subtitle">Vous n'avez pas les droits pour accéder à cette page</h2>
+{% endif %}
+
+{% endblock %}

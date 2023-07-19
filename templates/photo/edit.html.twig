@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Photo{% endblock %}
+
+{% block body %}
+
+{% if is_granted('ROLE_ADMIN') %}
+
+    <h2 class="subtitle">Modifier la Photo</h2>
+
+    {{ include('photo/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+    <a href="{{ path('home') }}" class="btn btn-warning">Retour à l'accueil</a>
+
+    {{ include('photo/_delete_form.html.twig') }}
+
+{% else %}
+    <h2 class="subtitle">Vous n'avez pas les droits pour modifier cette photo</h2>
+    <a href="{{ path('home') }}" class="btn btn-warning">Retour à l'accueil</a>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Prestation{% endblock %}
+
+{% block body %}
+{% if is_granted('ROLE_ADMIN') %}
+    <h2 class="subtitle">Ajouter une nouvelle prestation</h2>
+
+    {{ include('prestation/_form.html.twig') }}
+
+    <a href="{{ path('app_prestation_index') }}" class="btn btn-warning">Retour à la liste des prestations</a>
+{% else %}
+    <h2 class="subtitle">Vous n'avez pas les droits pour ajouter une prestation</h2>
+    <a href="{{ path('app_service_index') }}" class="btn btn-warning">Retour à la liste des pservices</a>
+{% endif %}
+
+{% endblock %}

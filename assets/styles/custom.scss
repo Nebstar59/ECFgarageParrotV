@@ -1,0 +1,284 @@
+$primary: grey;
+$secondary: #FF1801;
+$tertiary: #F5D365;
+$customBlue: #1134d1;
+
+@import "https://fonts.googleapis.com/css?family=Montserrat:400,700";
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    line-height: 2.5;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    width: 100%;
+    height: 100%;
+    padding: 20px 0;
+    background-image: url('./Images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+nav {
+    text-align: center;
+    font-size: 25px;
+    color: $customBlue;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: $customBlue;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 5px;
+    border: 2px solid $customBlue;
+    font-size: 20px;
+    font-weight: bold;
+   
+
+}
+
+.nav-link:hover {
+    background-color: $tertiary;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    border-bottom: 2px solid $tertiary;
+    margin: 0 20px;
+    color: white;
+}
+
+footer {
+    width: 100%;
+    height: 100%;
+    background-image: url('./Images/lamborghini.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding-top: 5%;
+}
+
+footer p {
+    color: $customBlue;
+    text-align: center;  
+}
+
+.title {
+    color: $tertiary;
+    text-align: center;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 0 20px;   
+}
+
+.subtitle {
+    text-align: center;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    color: $tertiary;
+}
+
+.car {
+    text-align: center;
+    font-size: larger;
+    font-weight: 900;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    color: black;
+    
+}
+
+div .card {
+    border: 2px solid $tertiary;
+    
+}
+.card .btn-secondary {
+    background-color: $tertiary;
+    border: 2px solid $tertiary;
+    color: white;
+    font-weight: 900;
+    margin: 15%;
+}
+
+.cardTitle {
+    color: $customBlue;
+    text-align: center;
+    text-decoration: underline;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    
+}
+
+.authorCard {
+    text-align: center;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    color: $customBlue;
+    font-size: larger;
+}
+
+.custom-link {
+    color: $customBlue;
+}
+
+.custom-link:hover {
+    color: $tertiary;
+}
+
+.btn-custom {
+    background-color: $tertiary;
+    border: 2px solid $tertiary;
+    color: white;
+    font-weight: 900;
+    margin: 15%;
+}
+
+h3 {
+    color: $customBlue;
+    text-align: center;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+#carPresentation {
+    background-color: $tertiary;
+    border-radius: 10px;
+}
+#carPresentation p {
+    margin: 10px;
+    color: $customBlue;
+    font-size: 20px; 
+}
+
+#photoService{
+    margin-top: 20px;
+}
+#photoService .carousel-item{
+    height: 800px;
+}
+#photoService .carousel-item img{
+    height: 800px;
+}
+#photoService .carousel-caption{
+    background-color: rgba(0,0,0,0.5);
+    padding: 10px;
+    border-radius: 10px;
+}
+#photoService .carousel-caption h5{
+    color: $tertiary;
+}
+#photoService .carousel-caption p{
+    color: white;
+}
+#carPhoto .carousel-item{
+    height: auto;
+}
+#carPhoto .carousel-item img{
+    height: auto;
+}
+#carPhoto .carousel-caption{
+    background-color: rgba(0,0,0,0.5);
+    padding: 10px;
+    border-radius: 10px;
+}
+#carPhoto .carousel-caption h5{
+    color: $tertiary;
+}
+#carPhoto .carousel-caption p{
+    color: white;
+}
+#carName {
+    color: $customBlue;
+    text-align: center;
+    text-decoration: underline;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+#carPrice {
+    color: $customBlue;
+    text-align: center;
+    text-decoration: underline;
+    padding-bottom: 2%;
+}
+
+
+@media screen and (max-width: 768px) {
+    .title {
+        font-size: 20px;
+    }
+
+    .nav-link {
+        margin: 10px 0;
+    }
+
+    nav {
+        flex-direction: column;
+    }
+
+    .nav-link {
+        margin: 10px 0;
+    }
+
+    .nav-link:hover {
+        background-color: #333;
+        color: #fff;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .title {
+        font-size: 15px;
+    }
+
+    .nav-link {
+        margin: 10px 0;
+    }
+
+    nav {
+        flex-direction: column;
+    }
+
+    .nav-link {
+        margin: 10px 0;
+    }
+
+    .nav-link:hover {
+        background-color: #333;
+        color: #fff;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .title {
+        font-size: 25px;
+    }
+
+    .nav-link {
+        margin: 10px 0;
+    }
+
+    nav {
+        flex-direction: column;
+    }
+
+    .nav-link {
+        margin: 10px 0;
+    }
+
+    .nav-link:hover {
+        background-color: #333;
+        color: #fff;
+    }
+}
+

@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Testimonial index{% endblock %}
+
+{% block body %}
+{% if is_granted('ROLE_ADMIN') %}
+    <h2 class="subtitle">Liste des avis</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Message</th>
+                <th>Note</th>
+                <th>Portée</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for testimonial in testimonials %}
+            <tr>
+                <td>{{ testimonial.id }}</td>
+                <td>{{ testimonial.name }}</td>
+                <td>{{ testimonial.content }}</td>
+                <td>{{ testimonial.note }}</td>
+                <td>{{ testimonial.scope }}</td>
+                <td>
+                    <a href="{{ path('app_testimonial_show', {'id': testimonial.id}) }}" class="btn btn-warning">Voir</a>
+                    <a href="{{ path('app_testimonial_edit', {'id': testimonial.id}) }}" class="btn btn-warning">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Aucun avis trouvé </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% else %}
+    <h2 class="subtitle">Vous n'avez pas les droits pour accéder à cette page</h2>
+{% endif %}
+
+{% endblock %}

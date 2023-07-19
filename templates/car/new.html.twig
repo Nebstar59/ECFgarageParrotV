@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Car{% endblock %}
+
+{% block body %}
+
+{% if is_granted('ROLE_ADMIN') %}
+    <h2 class="subtitle">Ajouter un véhicule à la vente</h2>
+
+    {{ include('car/_form.html.twig') }}
+
+    <a href="{{ path('app_car_index') }}">Retour à la liste des véhicules</a>
+{% else %}
+    <h2 class="subtitle">Vous n'avez pas les droits pour ajouter un véhicule</h2>
+{% endif %}
+    
+{% endblock %}

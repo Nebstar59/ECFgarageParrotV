@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New User{% endblock %}
+
+{% block body %}
+{% if is_granted('ROLE_SUPER_ADMIN') %}
+    <h2 class="subtitle">Ajouter un employé</h2>
+
+    {{ include('user/_form.html.twig') }}
+
+    <a href="{{ path('app_user_index') }}" class="btn btn-warning">Retour à la liste des employés</a>
+{% else %}
+    <h2 class="subtitle">Vous n'avez pas les droits pour accéder à cette page</h2>
+    <a href="{{ path('home') }}" class="btn btn-warning">Retour à la liste des employés</a>
+{% endif %}
+
+{% endblock %}

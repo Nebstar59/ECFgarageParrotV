@@ -1,0 +1,31 @@
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+            <h1 class="title">Bienvenue sur le site du Garage Vincent Parrot</h1>
+                <nav>
+                <a class="nav-link active" href="{{ path('home') }}">Accueil</a>
+                <a class="nav-link" href="{{ path('cars') }}">Nos véhicules d'occasion</a>
+                <a class="nav-link" href="{{ path('service') }}">Nos services</a>
+                <a class="nav-link" href="{{ path('estimate_new') }}">Demander un devis</a>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a class="nav-link" href="{{ path('admin') }}">Administration</a>
+                {% endif %}
+                <a class="nav-link" href="{{ path('login') }}">Se connecter</a>
+                {% if app.user %}
+                    <a class="nav-link" href="{{ path('app_logout') }}">Se déconnecter</a>
+                {% endif %}
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+   
+
+
+
+
+ 
+   

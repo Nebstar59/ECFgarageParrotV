@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+{% if is_granted('ROLE_SUPER_ADMIN') %}
+    <h2 class="subtitle">Créer un compte</h2>
+
+    {{ form_errors(registrationForm) }}
+
+    {{ form_start(registrationForm) }}
+        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.plainPassword, {
+            label: 'Password'
+        }) }}
+        {{ form_row(registrationForm.agreeTerms) }}
+
+        <button type="submit" class="btn btn-warning">Enregistrer</button>
+    {{ form_end(registrationForm) }}
+{% else %}
+    <h2 class="subtitle">Vous n'avez pas les droits pour créer un compte</h2>
+{% endif %}
+
+{% endblock %}

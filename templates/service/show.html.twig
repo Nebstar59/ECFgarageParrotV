@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Service{% endblock %}
+
+{% block body %}
+    <h2 class="subtitle"> {{ service.name }} </h1>
+
+    <div class="container-fluid">
+    <div class="row">
+    <div class="col-6">
+    {% if service.imageName %}
+        <img src="{{ asset('images/services/' ~ service.imageName) }}" alt="{{ service.name }}" class="img-fluid">
+    {% endif %}
+    </div>
+    <div class="col-6">
+    <p> {{ service.description }} </p>
+    {% if is_granted('ROLE_ADMIN') %}
+    <p><a href="{{ path('app_service_add', {'id': service.id}) }}" class="btn btn-danger">Ajouter une prestation au service</a>
+        <a href="{{ path('app_service_edit', {'id': service.id}) }}" class="btn btn-warning">Modifier le service</a>
+        {{ include('service/_delete_form.html.twig') }} </p>
+    {% endif %}
+    </div>
+    </div>
+    </div>
+    <h2 class="subtitle"> Prestations </h2>
+    <div class="container-fluid">
+    <div class="row">
+    <div class="card-group">
+    {% for prestation in service.prestations %}
+        <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ prestation.name }}</h5>
+                <img src="{{ asset('images/prestations/' ~ prestation.imageName) }}" alt="{{ prestation.name }}" class="card-img-top">
+                <p class="card-text">{{ prestation.description|length > 100 ? prestation.description|slice(0, 100) ~ '...' : prestation.description }}</p>
+                <p class="card-text">Prix : {{ prestation.price }} €</p>
+                {% if prestation.duration|date('h:i') == '00:00' %}
+                <p class="card-text">Durée variable</p>
+                {% else %}
+                <p class="card-text">Durée : {{ prestation.duration|date('h:i') }}</p>
+                {% endif %}
+                <p><a href="{{ path('app_prestation_show', {'id': prestation.id}) }}" class="btn btn-warning">Voir la prestation</a>
+                <a href="{{ path('app_service_index') }}" class="btn btn-warning">Retour aux services</a></p>
+            </div>
+        </div>
+        </div>
+    {% else %}
+        <p> Aucune prestation pour ce service </p>
+    {% endfor %}
+    </div>
+    </div>
+    </div>
+    </div>
+{% endblock %}

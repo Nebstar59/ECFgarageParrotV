@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Estimate index{% endblock %}
+
+{% block body %}
+
+{% if is_granted ('ROLE_ADMIN') %}
+
+    <h2 class="subtitle">Liste des devis</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Lastname</th>
+                <th>Firstname</th>
+                <th>Email</th>
+                <th>Message</th>
+                <th>Service</th>
+                <th>Prestation</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for estimate in estimates %}
+            <tr>
+                <td>{{ estimate.id }}</td>
+                <td>{{ estimate.lastname }}</td>
+                <td>{{ estimate.firstname }}</td>
+                <td>{{ estimate.email }}</td>
+                <td>{{ estimate.message }}</td>
+                <td>{{ estimate.service.name }}</td>
+                {% if estimate.prestation is not null %}
+                <td>{% for prestation in estimate.prestation %}
+                    {{ prestation.name }} <br>
+                    {% endfor %}
+                </td>
+                {% else %}
+                <td>Aucune prestation renseignée</td>
+                {% endif %}
+                <td>
+                    <a href="{{ path('app_estimate_show', {'id': estimate.id}) }}" class="btn btn-warning">Voir le devis</a>
+                    <a href="{{ path('app_estimate_edit', {'id': estimate.id}) }}" class="btn btn-warning">Modifier le devis</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Aucun devis trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% else %}
+    <h2 class="subtitle">Vous n'avez pas accès à cette page</h2>
+    <a href="{{ path('home') }}" class="btn btn-warning">Retour à l'accueil</a>
+{% endif %}
+
+{% endblock %}

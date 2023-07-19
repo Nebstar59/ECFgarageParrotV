@@ -3,3 +3,204 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+home:
+    path: /
+    controller: App\Controller\HomeController::index
+
+admin:
+    path: /admin
+    controller: App\Controller\Admin\AdminDashboardController::index
+
+admin_users:
+    path: /user
+    controller: App\Controller\UserController::index
+
+admin_cars:
+    path: /car
+    controller: App\Controller\CarController::index
+
+admin_services:
+    path: /service
+    controller: App\Controller\ServiceController::index
+
+admin_testimonials:
+    path: /testimonial
+    controller: App\Controller\TestimonialController::index
+
+admin_estimates:
+    path: /estimate
+    controller: App\Controller\EstimateController::index
+
+admin_prestations:
+    path: /prestation
+    controller: App\Controller\PrestationController::index
+
+admin_contacts:
+    path: /contact
+    controller: App\Controller\ContactController::index
+
+cars:
+    path: /car
+    controller: App\Controller\CarController::index
+
+car_show:
+    path: /car/{id}
+    controller: App\Controller\CarController::show
+    requirements:
+        id: '\d+'
+
+car_new:
+    path: /car/new
+    controller: App\Controller\CarController::new
+
+car_edit:
+    path: /car/{id}/edit
+    controller: App\Controller\CarController::edit
+    requirements:
+        id: '\d+'
+
+car_delete:
+    path: /car/{id}/delete
+    controller: App\Controller\CarController::delete
+    requirements:
+        id: '\d+'
+
+car_photo:
+    path: /car/{id}/photo
+    controller: App\Controller\CarController::addPhoto
+    requirements:
+        id: '\d+'
+
+car_contact:
+    path: /car/{id}/contact
+    controller: App\Controller\CarController::contact
+    requirements:
+        id: '\d+'
+
+
+
+service:
+    path: /service
+    controller: App\Controller\ServiceController::index
+
+service_show:
+    path: /service/{id}
+    controller: App\Controller\ServiceController::show
+    requirements:
+        id: '\d+'
+
+service_new:
+    path: /service/new
+    controller: App\Controller\ServiceController::new
+
+service_edit:
+    path: /service/{id}/edit
+    controller: App\Controller\ServiceController::edit
+    requirements:
+        id: '\d+'
+
+service_delete:
+    path: /service/{id}/delete
+    controller: App\Controller\ServiceController::delete
+    requirements:
+        id: '\d+'
+
+service_prestations:
+    path: /service/{id}/prestations
+    controller: App\Controller\ServiceController::showPrestations
+    requirements:
+        id: '\d+'
+
+testimonial:
+    path: /testimonial
+    controller: App\Controller\TestimonialController::index
+
+testimonial_new:
+    path: /testimonial/new
+    controller: App\Controller\TestimonialController::new
+
+user:
+    path: /user
+    controller: App\Controller\UserController::index
+
+user_new:
+    path: /user/new
+    controller: App\Controller\UserController::new
+
+user_edit:
+    path: /user/{id}/edit
+    controller: App\Controller\UserController::edit
+    requirements:
+        id: '\d+'
+
+user_delete:
+    path: /user/{id}/delete
+    controller: App\Controller\UserController::delete
+    requirements:
+        id: '\d+'
+
+login:
+    path: /login
+    controller: App\Controller\SecurityController::login
+
+logout:
+    path: /logout
+    controller: App\Controller\SecurityController::logout
+
+register:
+    path: /register
+    controller: App\Controller\RegistrationController::register
+
+estimate:
+    path: /estimate
+    controller: App\Controller\EstimateController::index
+
+estimate_new:
+    path: /estimate/new
+    controller: App\Controller\EstimateController::new
+
+estimate_show:
+    path: /estimate/{id}
+    controller: App\Controller\EstimateController::show
+    requirements:
+        id: '\d+'
+
+estimate_edit:
+    path: /estimate/{id}/edit
+    controller: App\Controller\EstimateController::edit
+    requirements:
+        id: '\d+'
+
+estimate_delete:
+    path: /estimate/{id}/delete
+    controller: App\Controller\EstimateController::delete
+    requirements:
+        id: '\d+'
+
+prestation:
+    path: /prestation
+    controller: App\Controller\PrestationController::index
+
+prestation_new:
+    path: /prestation/new
+    controller: App\Controller\PrestationController::new
+
+prestation_show:
+    path: /prestation/{id}
+    controller: App\Controller\PrestationController::show
+    requirements:
+        id: '\d+'
+
+prestation_edit:
+    path: /prestation/{id}/edit
+    controller: App\Controller\PrestationController::edit
+    requirements:
+        id: '\d+'
+
+prestation_delete:
+    path: /prestation/{id}/delete
+    controller: App\Controller\PrestationController::delete
+    requirements:
+        id: '\d+'
+

@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Testimonial{% endblock %}
+
+{% block body %}
+{% if is_granted('ROLE_ADMIN') %}
+
+    <h2 class="subtitle">Avis de {{ testimonial.name }}</h2>
+    <h3 class="cardTitle"> Note: {{ testimonial.note }}/5</h3>
+    <p>{{ testimonial.content }}</p>
+    <p>Portée: {{ testimonial.scope }}</p>
+
+
+    <a href="{{ path('app_testimonial_index') }}" class="btn btn-warning">Retour aux avis</a>
+    <a href="{{ path('app_testimonial_edit', {'id': testimonial.id}) }}" class="btn btn-warning">Modifier</a>
+
+    {{ include('testimonial/_delete_form.html.twig') }}
+
+{% else %}
+    <h2 class="subtitle">Avis de {{ testimonial.name }}</h2>
+    <h3 class="cardTitle"> Note: {{ testimonial.note }}/5</h3>
+    <p>{{ testimonial.content }}</p>
+    <p>Portée: {{ testimonial.scope }}</p>
+
+    <a href="{{ path('app_testimonial_index') }}" class="btn btn-warning">Retour aux avis</a>
+
+{% endif %}
+{% endblock %}

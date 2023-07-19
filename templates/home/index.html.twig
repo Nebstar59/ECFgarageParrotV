@@ -1,0 +1,139 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js">
+    </script>
+{% endblock %}
+{% block body %}
+
+  <h2 class="subtitle">Votre garage automobile à Toulouse</h2>
+    <div class="container">
+        <div class="row">
+        <div class="col-md-12">
+            <p>Fort de ses 15 années d'expérience dans le domaine de la réparation automobile, <strong> Vincent Parrot </strong> a ouvert son propre garage en 2021 à Toulouse.
+            Le garage <strong> Vincent Parrot </strong> est situé à Toulouse, dans le quartier de la Côte Pavée. Nous vous accueillons du lundi au vendredi de 8h à 12h et de 14h à 18h. </p>
+            <p>Notre garage est spécialisé dans la réparation et l'entretien de véhicules toutes marques. Nous proposons également la vente de véhicules d'occasion. </p>
+            <p>Notre équipe de professionnels est à votre écoute pour répondre à vos besoins et vous conseiller. </p>
+            <p>Nous vous proposons des devis gratuits et des tarifs compétitifs. </p>
+            <p>N'hésitez pas à nous contacter pour plus d'informations. </p>
+        </div>
+        </div>
+    </div>
+<!-- fin partie qui sommes nous -->
+<!-- partie services proposés sous forme de carousel -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-12" id="photoService">
+            <h2 class="subtitle">Nos services</h2>
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    {% for service in services %}
+                        <div class="carousel-item {% if loop.first %}active{% endif %}">
+                            <img class="d-block w-100" src="{{ asset('images/services/' ~ service.imageName) }}" alt="{{ service.name }}">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>{{ service.name }}</h5>
+                                <p>{{ service.description|length > 250 ? service.description|slice(0, 250) ~ '...' : service.description }}</p>
+                                <a href="{{ path('service_show', {'id': service.id}) }}" class="btn btn-warning">En savoir plus</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Précédent</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Suivant</span>
+                </a>
+            </div>
+        </div>            
+    </div>
+</div>
+<!-- fin partie services proposés -->
+<!-- partie véhicules d'occasion sous forme de carte responsive -->
+<h2 class="subtitle">Nos derniers véhicules d'occasion</h2>
+<div class="container">
+<div class="row">
+    {% for car in cars %}
+    <div class="col-lg-3 col-md-6 col-sm-9 col-xs-12">
+        <div class="card">
+            {% if car.photos is not empty %}
+            <img src="{{ asset('images/cars/' ~ car.photos[0].imageName) }}" class="card-img-top" alt="{{ car.brand }} {{ car.model }}">
+            {% else %}
+            <img src="{{ asset('../../assets/styles/Images/icone-appareil-photo-papier-bleu.jpg') }}" class="card-img-top" alt="Pas d'image disponible">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="cardTitle">{{ car.brand }} {{ car.model }}</h5>
+                <p class="card-text">{{ car.price }} €</p>
+                <a href="{{ path('car_show', {'id': car.id}) }}" class="btn btn-warning">Voir le véhicule</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+</div>
+<h2 class="subtitle">Nos meilleures offres de véhicules d'occasion</h2>
+<div class="container">
+<div class="row">
+{% for car in bestCars %}
+    <div class="col-lg-3 col-md-6 col-sm-9 col-xs-12">
+        <div class="card">
+            {% if car.photos is not empty %}
+            <img src="{{ asset('images/cars/' ~ car.photos[0].imageName) }}" class="card-img-top" alt="{{ car.brand }} {{ car.model }}">
+            {% else %}
+            <img src="{{ asset('../../assets/styles/Images/icone-appareil-photo-papier-bleu.jpg') }}" class="card-img-top" alt="Pas d'image disponible">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="cardTitle">{{ car.brand }} {{ car.model }}</h5>
+                <p class="card-text">{{ car.price }} €</p>
+                <a href="{{ path('car_show', {'id': car.id}) }}" class="btn btn-warning">Voir le véhicule</a>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+</div>
+</div>
+<!-- fin partie véhicules d'occasion -->
+<!-- partie témoignages clients en 2 colonnes une pour afficher les avis et l'autre pour donner son avis -->
+<h2 class="subtitle">Témoignages</h2>
+<div class="container">
+	<div class="row">
+		<div class="col-md-6">
+			<h3 class="cardTitle">Avis des clients</h3>
+            {% if testimonials is empty %}
+                <p class="text-center">Aucun avis pour le moment</p>
+            {% endif %}
+			{% for testimonial in testimonials %}
+			{% if testimonial.scope == 'public' %}
+			<div class="card">
+				<div class="card-content">
+					<p class="authorCard">{{ testimonial.name }}</p>
+                    <p class="text-center">Service : {{ testimonial.service.name }}</p>
+                    <p class="text-center">Prestation : {{ testimonial.prestation.name }}</p>
+					<p class="text-center">Note : {{ testimonial.note }}/5</p>
+					<p class="card-text">{{ testimonial.content }}</p>
+				</div>
+			</div>
+			{% endif %}
+			{% endfor %}
+		</div>
+		<div class="col-md-6">
+			<h3 class="cardTitle">Donnez votre avis</h3>
+			{{ include ('testimonial/_form.html.twig') }}
+		</div>
+	</div>
+</div>
+<!-- fin partie témoignages clients -->
+{% endblock %}
+

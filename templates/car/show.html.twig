@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Car{% endblock %}
+
+{% block body %}
+
+{% if is_granted('ROLE_ADMIN') %}
+    <p><a href="{{ path('app_car_new') }}" class="btn btn-warning">Créer une nouvelle annonce</a>
+    <a href="{{ path('app_car_edit', {'id': car.id}) }}" class="btn btn-warning">Modifier cette annonce</a> {{ include('car/_delete_form.html.twig') }}</p>    
+{% endif %}
+    
+<div class="container-fluid">
+<div class="row">
+<div class="col-lg-2 col-md-4 col-sm-4 col-xs-12" id="carPresentation">
+    <h2 id="carName"> {{ car.brand }} {{ car.model }} </h2>
+    <h3 id="carPrice"> {{ car.price }} € </h3>
+    <p> {{ car.description }} </p>
+    <p><strong>Mise en circulation : </strong> {{ car.releaseYear|date('d/m/Y') }} </p>
+    <p><strong>Kilométrage : </strong> {{ car.kilometers }} km </p>
+    <p> Annonce publiée le {{ car.createdAt|date('d/m/Y') }} et dernière mise à jour le {{ car.updatedAt|date('d/m/Y') }}</p>
+    <p><a href="{{ path('app_car_contact', {'id': car.id}) }}" class="btn btn-secondary">Contacter le vendeur</a></p><br>
+    <p><a href="{{ path('app_car_index') }}" class="btn btn-secondary">Retour aux annonces</a></p>
+</div>
+<div class="col-lg-10 col-md-8 col-sm-8 col-xs-12" id="carPhoto">
+    {% if car.photos is not empty %}
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                {% for photo in car.photos %}
+                    <div class="carousel-item {% if loop.first %} active {% endif %}">
+                        <img src="{{ asset('images/cars/' ~ photo.imageName) }}" class="d-block w-100" alt="{{ photo.title }}" title="{{ photo.title }}">
+                    </div>
+                {% endfor %}
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Précédent</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Suivant</span>
+            </a>
+        </div>
+    {% else %}
+    <span> Pas de photo disponible </span>
+    {% endif %}
+</div>
+</div>
+</div>
+
+{% endblock %}
+    
+
+

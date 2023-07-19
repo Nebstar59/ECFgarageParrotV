@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Tableau de bord administrateur {% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+    {% if is_granted('ROLE_ADMIN') %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="subtitle">Tableau de bord administrateur</h2>
+                <!-- on récupère le nom de l'utilisateur connecté -->
+                <h3>Bonjour {{ app.user.lastname }} {{ app.user.firstname }}</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="subtitle">Que souhaitez-vous faire ?</h2>
+                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                <a href="{{ path('admin_users') }}" class="btn btn-warning">Gestion des utilisateurs</a>
+                {% endif %}                
+                <a href="{{ path('admin_cars') }}" class="btn btn-warning">Gestion des annonces de véhicules </a>
+                <a href="{{ path('admin_services') }}" class="btn btn-warning">Gestion des services</a>
+                <a href="{{ path('admin_prestations') }}" class="btn btn-warning">Gestion des prestations</a>
+                <a href="{{ path('admin_testimonials') }}" class="btn btn-warning">Gestion des avis</a>
+                <a href="{{ path('admin_estimates') }}" class="btn btn-warning">Gestion des devis</a>
+                <a href="{{ path('admin_contacts') }}" class="btn btn-warning">Gestion des contacts</a>
+                <a href="{{ path('home') }}" class="btn btn-warning">Retour à l'accueil</a>
+            </div>
+        </div>
+    </div>
+
+{% else %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="subtitle">Vous n'avez pas accès à cette page</h2>
+                <p> <a href="{{ path('home') }}">Retour à l'accueil</a> </p>
+            </div>
+        </div>
+    </div>
+
+{% endif %}
+
+{% endblock %}
+
+
+
+
+
+
+
+

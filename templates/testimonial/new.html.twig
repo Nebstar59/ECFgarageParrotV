@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Testimonial{% endblock %}
+
+{% block body %}
+    <h2 class="subtitle">Donnez votre avis</h2>
+
+    {{ include('testimonial/_form.html.twig') }}
+
+    <a href="{{ path('home') }}" class="btn btn-warning">Retour à l'accueil</a>
+    
+{% endblock %}

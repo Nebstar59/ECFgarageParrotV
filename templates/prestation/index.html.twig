@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Prestation index{% endblock %}
+
+{% block body %}
+
+{% if is_granted('ROLE_ADMIN') %}
+
+    <h2 class="subtitle">Liste des prestations</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Service</th>
+                <th>Description</th>
+                <th>Prix</th>
+                <th>Durée estimée</th>
+                <th>Image</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for prestation in prestations %}
+            <tr>
+                <td>{{ prestation.id }}</td>
+                <td>{{ prestation.name }}</td>
+                <td>{{ prestation.service.name }}</td>
+                <td>{{ prestation.description }}</td>
+                {% if prestation.price == 0 %}
+                    <td>Prix variable</td>
+                {% else %}
+                <td>{{ prestation.price }}€</td>
+                {% endif %}
+                {% if prestation.duration|date('H:i') == '00:00' %}
+                    <td>Durée variable</td>
+                {% else %}
+                <td>{{ prestation.duration ? prestation.duration|date('H:i') : '' }}</td>
+                {% endif %}
+                <td><img src="{{ asset('images/prestations/' ~ prestation.imageName) }}" alt="{{ prestation.name }}" width="100px"></td>
+                <td>
+                    <a href="{{ path('app_prestation_show', {'id': prestation.id}) }}" class="btn btn-warning">Voir la prestation</a>
+                    <a href="{{ path('app_prestation_edit', {'id': prestation.id}) }}" class="btn btn-warning">Modifier la prestation</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">Aucune prestation trouvée</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% else %}
+    <h2 class="subtitle">Vous n'avez pas les droits pour accéder à cette page</h2>
+    <a href="{{ path('app_home') }}" class="btn btn-warning">Retour à l'accueil</a>
+{% endif %}
+{% endblock %}

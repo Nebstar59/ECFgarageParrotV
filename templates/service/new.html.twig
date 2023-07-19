@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Service{% endblock %}
+
+{% block body %}
+{% if is_granted('ROLE_ADMIN') %}
+    <h2 class="subtitle">Ajouter un service</h2>
+
+    {{ include('service/_form.html.twig') }}
+
+    <a href="{{ path('app_service_index') }}" class="btn btn-warning">Retour aux services</a>
+{% else %}
+    <h2 class="subtitle">Vous n'avez pas les droits pour ajouter un service</h2>
+    <a href="{{ path('app_service_index') }}" class="btn btn-warning">Retour aux services</a>
+{% endif %}
+{% endblock %}

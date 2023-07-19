@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Photo index{% endblock %}
+
+{% block body %}
+{% if is_granted('ROLE_ADMIN') %}
+
+    <h2 class="subtitle">Liste des photos</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Image</th>
+                <th>Véhicule</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for photo in photos %}
+            <tr>
+                <td>{{ photo.id }}</td>
+                <td>{{ photo.title }}</td>
+                <td><img src="{{ asset('images/cars/' ~ photo.imageName) }}" alt="{{ photo.title }}" width="100"></td>
+                <td>{{ photo.car.brand }} {{ photo.car.model }}</td>
+                <td>
+                    <a href="{{ path('app_photo_show', {'id': photo.id}) }}" class="btn btn-warning">Voir la photo</a>
+                    <a href="{{ path('app_photo_edit', {'id': photo.id}) }}" class="btn btn-warning">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Aucune photo trouvée</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% else %}
+    <h2 class="subtitle">Vous n'avez pas les droits pour accéder à cette page</h2>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Service{% endblock %}
+
+{% block body %}
+{% if is_granted('ROLE_ADMIN') %}
+
+    <h2 class="subtitle">Modifier le service</h2>
+
+    {{ include('service/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+    <a href="{{ path('app_service_index') }}">Retour aux services</a>
+
+    {{ include('service/_delete_form.html.twig') }}
+
+{% else %}
+    <h2 class="subtitle">Vous n'avez pas les droits pour modifier ce service</h2>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Prestation{% endblock %}
+
+{% block body %}
+    <h2 class="subtitle">{{ prestation.service.name }}</h2>
+    <h3 class="cardTitle"> {{ prestation.name }} </h3>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="{{ asset('images/prestations/' ~ prestation.imageName) }}" alt="{{ prestation.name }}" class="img-fluid">
+            </div>
+            <div class="col-md-6">
+                <p class="text-justify">{{ prestation.description }}</p>
+                {% if prestation.duration|date('H:i') == '00:00' %}
+                    <p><strong>Durée estimée : Variable selon la demande</strong></p>
+                {% else %}
+                    <p><strong>Durée estimée : {{ prestation.duration|date('H:i') }} minutes</strong></p>
+                {% endif %}
+                {% if prestation.price == 0 %}
+                    <p><strong>Prix : Variable selon la demande</strong></p>
+                {% else %}
+                    <p><strong>Prix : {{ prestation.price }} €</strong></p>
+                {% endif %}
+                <p><a href="{{ path('estimate_new', {'id': prestation.id}) }}" class="btn btn-success">Demander un devis</a>
+                <a href="{{ path('app_service_index') }}" class="btn btn-warning">Retour aux services</a></p>
+                {% if is_granted('ROLE_ADMIN') %}
+                <p><a href="{{ path('prestation_edit', {'id': prestation.id}) }}" class="btn btn-warning">Modifier</a>
+                        {{ include('prestation/_delete_form.html.twig') }}
+                </p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

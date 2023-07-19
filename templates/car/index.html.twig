@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Car index{% endblock %}
+
+{% block body %}
+
+<h2 class="subtitle">Recherche de voitures</h1>
+
+        {{ form_start(form) }}
+            {{ form_row(form.brand) }}
+            {{ form_row(form.model) }}
+            {{ form_row(form.price) }}
+            {{ form_row(form.submit) }}
+        {{ form_end(form) }}
+
+{% if is_granted('ROLE_ADMIN') %}
+
+    <h2 class="subtitle">Liste des véhicules</h2>
+<div class="container-fluid">
+<div class="row">
+{% for car in cars %}
+<div class="col-lg-2 col-md-4 col-sm-10 col-xs-12">
+    <div class="card">
+        {% if car.photos is not empty %}
+        <img src="{{ asset('images/cars/' ~ car.photos[0].imageName) }}" class="card-img-top" alt="{{ car.brand }} {{ car.model }}">
+        {% else %}
+        <img src="{{ asset('../../assets/styles/Images/icone-appareil-photo-papier-bleu.jpg') }}" class="card-img-top" alt="Pas d'image disponible">
+        {% endif %}
+        <div class="card-body">
+            <h5 class="cardTitle">{{ car.brand }} {{ car.model }}</h5>
+            <p class="card-text">{{ car.price }} €</p>
+            <a href="{{ path('car_show', {'id': car.id}) }}" class="btn btn-warning">Voir le véhicule</a>
+            <a href="{{ path('car_edit', {'id': car.id}) }}" class="btn btn-warning">Modifier le véhicule</a>
+            <a href="{{ path('car_delete', {'id': car.id}) }}" class="btn btn-warning">Supprimer le véhicule</a>
+        </div>
+    </div>
+</div>
+{% endfor %}
+</div>
+</div>
+{% else %}
+
+    <h2 class="subtitle"> Retrouvez l'ensemble de nos véhicules d'occasion</h1>
+    {% if cars is empty %}
+        <p>Il n'y a pas de véhicule dans la base de données</p>
+    {% endif %}
+    <!-- présentation des véhicules sous forme de cartes responsive -->
+    <div class="container-fluid">
+    <div class="row">
+    <div class="card-group">
+    {% for car in cars %}
+    <div class="col-lg-2 col-md-4 col-sm-10 col-xs-12">
+        <div class="card">
+            {% if car.photos is not empty %}
+            <img src="{{ asset('images/cars/' ~ car.photos[0].imageName) }}" class="card-img-top" alt="{{ car.brand }} {{ car.model }}">
+            {% else %}
+            <img src="{{ asset('../../assets/styles/Images/icone-appareil-photo-papier-bleu.jpg') }}" class="card-img-top" alt="Pas d'image disponible">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="cardTitle">{{ car.brand }} {{ car.model }}</h5>
+                <p class="card-text">{{ car.price }} €</p>
+
+                <a href="{{ path('car_show', {'id': car.id}) }}" class="btn btn-warning">Voir le véhicule</a>
+                <a href="{{ path('car_contact', {'id': car.id}) }}" class="btn btn-warning">Nous contacter</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+    </div>
+    </div>
+{% endif %}
+{% endblock %}
+
+
+
+
+
+
+
+
+
+

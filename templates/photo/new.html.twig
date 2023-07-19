@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Photo{% endblock %}
+
+{% block body %}
+{% if is_granted('ROLE_ADMIN') %}
+    <h2 class="subtitle"> Ajouter une photo </h2>
+
+    {{ include('photo/_form.html.twig') }}
+
+    <a href="{{ path('app_car_index') }}">Retour aux véhicules</a>
+{% else %}
+    <h2 class="subtitle"> Vous n'avez pas les droits pour ajouter une photo </h2>
+{% endif %}
+{% endblock %}
