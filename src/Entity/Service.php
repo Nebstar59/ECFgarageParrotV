@@ -43,8 +43,6 @@ class Service
     #[ORM\OneToMany(mappedBy: 'service', targetEntity: Estimate::class)]
     private Collection $estimates;
 
-    #[ORM\ManyToOne(inversedBy: 'service')]
-    private ?Garage $garage = null;
 
     #[ORM\OneToMany(mappedBy: 'service', targetEntity: Testimonial::class)]
     private Collection $testimonials;
@@ -191,18 +189,6 @@ class Service
                 $estimate->setService(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getGarage(): ?Garage
-    {
-        return $this->garage;
-    }
-
-    public function setGarage(?Garage $garage): static
-    {
-        $this->garage = $garage;
 
         return $this;
     }

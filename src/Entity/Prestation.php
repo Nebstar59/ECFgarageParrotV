@@ -50,8 +50,6 @@ class Prestation
     #[ORM\ManyToMany(targetEntity: Estimate::class, mappedBy: 'prestation')]
     private Collection $estimates;
 
-    #[ORM\ManyToOne(inversedBy: 'prestation')]
-    private ?Garage $garage = null;
 
     #[ORM\OneToMany(mappedBy: 'prestation', targetEntity: Testimonial::class)]
     private Collection $testimonials;
@@ -200,18 +198,6 @@ class Prestation
         if ($this->estimates->removeElement($estimate)) {
             $estimate->removePrestation($this);
         }
-
-        return $this;
-    }
-
-    public function getGarage(): ?Garage
-    {
-        return $this->garage;
-    }
-
-    public function setGarage(?Garage $garage): static
-    {
-        $this->garage = $garage;
 
         return $this;
     }
