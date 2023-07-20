@@ -8,10 +8,10 @@
     RewriteRule ^.well-known/acme-challenge - [L]
 
     # redirect to no-www
-    RewriteBase /
-    RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
-    RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
-
+    RewriteBase https://garageparrot.sectorzone.net/n0c-storage/home/nuncxvbr/public_html/public/index.php
+   
+    RewriteCond %{HTTP_HOST} ^ http://garageparrot.sectorzone.net/n0c-storage/ [NC]
+    RewriteRule ^(/home/nuncxvbr/public_html/public/index.php) 
     # https redirect
     RewriteCond %{HTTPS} !=on
     RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
