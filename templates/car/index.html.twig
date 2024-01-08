@@ -4,7 +4,7 @@
 
 {% block body %}
 
-<h2 class="subtitle">Recherche de voitures</h1>
+<h2 class="subtitle">Recherche de voitures</h2>
 
         {{ form_start(form) }}
             {{ form_row(form.brand) }}
@@ -39,12 +39,10 @@
 </div>
 </div>
 {% else %}
-
     <h2 class="subtitle"> Retrouvez l'ensemble de nos véhicules d'occasion</h1>
     {% if cars is empty %}
         <p>Il n'y a pas de véhicule dans la base de données</p>
     {% endif %}
-    <!-- présentation des véhicules sous forme de cartes responsive -->
     <div class="container-fluid">
     <div class="row">
     <div class="card-group">

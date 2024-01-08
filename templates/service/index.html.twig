@@ -13,7 +13,8 @@
 <div class="card">
   <div class="card-body">
     <h5 class="cardTitle">{{ service.name }}</h5>
-    <img src="{{ asset('images/services/' ~ service.imageName) }}" alt="{{ service.name }}" class="card-img-top">
+    <img src="{{ asset('images/services/' ~ service.imageName) }}" alt="{{ service.name }}" class="card-img-top" style="width:100%; height: 200px; object-fit: cover;">
+    
     <!-- balise p pour afficher la description mais en limitant sa longueur et en ajoutant des points de suspension -->
     <p class="card-text">{{ service.description | length > 250 ? service.description | slice(0, 250) ~ '...' : service.description }}</p>
     <p><a href="{{ path('service_show', {'id': service.id}) }}" class="btn btn-warning">Voir le service</a>
